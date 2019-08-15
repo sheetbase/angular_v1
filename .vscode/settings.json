@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/.vscode": true,
+
+        "**/dist": true,
+
+        "**/coverage": true
+    }
+}

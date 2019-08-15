@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular": {
+    "app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular",
+            "outputPath": "dist/app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -124,6 +124,41 @@
           }
         }
       }
+    },
+    "sheetbase": {
+      "projectType": "library",
+      "root": "projects/sheetbase",
+      "sourceRoot": "projects/sheetbase/src",
+      "prefix": "sheetbase",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/sheetbase/tsconfig.lib.json",
+            "project": "projects/sheetbase/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sheetbase/src/test.ts",
+            "tsConfig": "projects/sheetbase/tsconfig.spec.json",
+            "karmaConfig": "projects/sheetbase/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sheetbase/tsconfig.lib.json",
+              "projects/sheetbase/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
-  "defaultProject": "angular"
+  "defaultProject": "app"
 }

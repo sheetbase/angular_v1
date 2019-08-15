@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SheetbaseComponent } from './sheetbase.component';
+import { OopsComponent } from './oops.component';
 
-describe('SheetbaseComponent', () => {
-  let component: SheetbaseComponent;
-  let fixture: ComponentFixture<SheetbaseComponent>;
+describe('OopsComponent', () => {
+  let component: OopsComponent;
+  let fixture: ComponentFixture<OopsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SheetbaseComponent ]
+      declarations: [ OopsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SheetbaseComponent);
+    fixture = TestBed.createComponent(OopsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

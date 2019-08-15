@@ -1,0 +1,60 @@
+$base-color: #F4F4F4;
+$shine-color: rgba(229,229,229,0.8);
+$animation-duration: 3.0s;
+$avatar-offset: 52 + 16;
+
+@mixin background-gradient {
+  background-image: linear-gradient(90deg, $base-color 0px, $shine-color 20rem, $base-color 30rem);
+  background-size: 60rem;
+}
+
+.skeleton {
+  display: flex;
+  justify-content: center;
+}
+  
+.content {
+  width: 100%;
+  max-width: 30rem;
+  
+  .image {
+    width: 100%;
+    max-width: 30rem;
+    height: 20rem;
+    background-color: #ccc;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    
+    @include background-gradient;
+    animation: shine $animation-duration infinite ease-out;
+  }
+    
+  .line {
+    width: 100%;
+    max-width: 30rem;
+    height: 1rem;
+    margin: 1rem 0;
+    border-radius: .5rem;
+    
+    @include background-gradient;
+    animation: shine $animation-duration infinite ease-out;
+  }
+
+  .image + .line {
+    max-width: 10rem;
+  }
+  
+  .line:last-child {
+    max-width: 20rem;
+  }
+}
+ 
+@keyframes shine {
+  0% {
+    background-position: -20rem;
+  }
+  
+  40%, 100% {
+    background-position: 30rem;
+  }
+}

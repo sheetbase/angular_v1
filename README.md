@@ -1,27 +1,76 @@
-# Angular
+# Sheetbase Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+Sheetbase wrapper for Angular apps
 
-## Development server
+<!-- <block:header> -->
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+[![Build Status](https://travis-ci.com/sheetbase/angular.svg?branch=master)](https://travis-ci.com/sheetbase/angular) [![Coverage Status](https://coveralls.io/repos/github/sheetbase/angular/badge.svg?branch=master)](https://coveralls.io/github/sheetbase/angular?branch=master) [![License][license_badge]][license_url] [![Support me on Patreon][badge_patreon]][patreon_url] [![PayPal][badge_paypal_donate]][paypal_donate_url] [![Ask me anything][badge_ask_me]][ask_me_url]
 
-## Code scaffolding
+<!-- </block:header> -->
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting started
 
-## Build
+Install: `npm install --save @sheetbase/client @sheetbase/angular`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```ts
+import { initializeApp } from '@sheetbase/client/app';
+import { SheetbaseService } from '@sheetbase/angular';
 
-## Running unit tests
+// create a Sheetbase app
+const sheetbaseApp = initializeApp(/* options */);
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+// init the Sheetbase service
+this.sheetbaseService.setApp(sheetbaseApp);
 
-## Running end-to-end tests
+// using
+const result = await this.sheetbaseService.api().get('/');
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Services
 
-## Further help
+- `SheetbaseService`: wrapper of Sheetbase app
+- `ApiService`: wrapper of app.api()
+- `DatabaseService`: wrapper of app.database()
+- `AuthService`: wrapper of app.auth()
+- `MailService`: wrapper of app.mail()
+- `StorageService`: wrapper of app.storage()
+- `LocalstorageService`: wrapper of app.localstorage()
+- `CacheService`: wrapper of app.cache()
+- `FetchService`: wrapper of app.fetch()
+- `AppService`: app stuffs
+- `NavService`: navigation
+- `DataService`: useful data methods
+- `CurrencyService`: format and convert currency
+- `DateService`: format date time
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Components
+
+- `sheetbase-oauth-popup`: oauth popup handler
+- `sheetbase-oops`: 404 component
+- `sheetbase-skeleton`: skeleton component
+
+## Pipes
+
+- `filter`: simple filter
+- `o2a`: turn object into array
+- `safe`: safe html binding or url
+
+## Lisence
+
+Sheetbase Angular is released under the [MIT](https://github.com/sheetbase/angular/blob/master/LICENSE) license.
+
+<!-- <block:footer> -->
+
+[license_badge]: https://img.shields.io/github/license/mashape/apistatus.svg
+[license_url]: https://github.com/sheetbase/angular/blob/master/LICENSE
+
+[badge_patreon]: https://lamnhan.github.io/assets/images/badges/patreon.svg
+[patreon_url]: https://www.patreon.com/lamnhan
+
+[badge_paypal_donate]: https://lamnhan.github.io/assets/images/badges/paypal_donate.svg
+[paypal_donate_url]: https://www.paypal.me/lamnhan
+
+[badge_ask_me]: https://img.shields.io/badge/ask/me-anything-1abc9c.svg
+[ask_me_url]: https://m.me/sheetbase
+
+<!-- </block:footer> -->
