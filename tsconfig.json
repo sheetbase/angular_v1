@@ -25,7 +25,8 @@
       "sheetbase/*": [
         "dist/sheetbase/*"
       ]
-    }
+    },
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

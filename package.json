@@ -34,6 +34,7 @@
     "@angular/platform-browser": "~8.2.0",
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
+    "@ionic/angular": "^4.7.4",
     "@sheetbase/client": "file:../client/sheetbase-client-1.1.0.tgz",
     "@sheetbase/models": "^1.5.0",
     "rxjs": "~6.4.0",
