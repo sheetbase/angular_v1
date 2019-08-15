@@ -37,6 +37,7 @@ export { DataPromotionService } from './lib/services/data-promotion/data-promoti
 export { DataAudioService } from './lib/services/data-audio/data-audio.service';
 export { DataVideoService } from './lib/services/data-video/data-video.service';
 export { DataBundleService } from './lib/services/data-bundle/data-bundle.service';
+export { DataOptionService } from './lib/services/data-option/data-option.service';
 
 // components
 export { OauthPopupComponentModule } from './lib/components/oauth-popup/oauth-popup.module';
