@@ -176,6 +176,10 @@ export class DataVideoService {
     return this.Database.rate(this.sheet, key, stars);
   }
 
+  share(key: string, providers: string[] = []) {
+    return this.Database.share(this.sheet, key, providers);
+  }
+
   clearCachedAll() {
     return this.Database.clearCachedAll(this.sheet);
   }

@@ -297,4 +297,8 @@ export class DatabaseService {
     return from(this.Sheetbase.database().rate(sheet, key, stars));
   }
 
+  share(sheet: string, key: string, providers: string[] = []) {
+    return from(this.Sheetbase.database().share(sheet, key, providers));
+  }
+
 }

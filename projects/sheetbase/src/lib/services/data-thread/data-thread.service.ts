@@ -207,6 +207,14 @@ export class DataThreadService {
     return this.Database.updateComment(this.sheet, key);
   }
 
+  rate(key: string, stars: number) {
+    return this.Database.rate(this.sheet, key, stars);
+  }
+
+  share(key: string, providers: string[] = []) {
+    return this.Database.share(this.sheet, key, providers);
+  }
+
   add(item: Thread) {
     return this.Database.add(this.sheet, null, item);
   }
