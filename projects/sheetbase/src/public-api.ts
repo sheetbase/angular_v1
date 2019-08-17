@@ -25,19 +25,20 @@ export { DateService } from './lib/services/date/date.service';
 // data services
 export { DataCategoryService } from './lib/services/data-category/data-category.service';
 export { DataTagService } from './lib/services/data-tag/data-tag.service';
-export { DataAuthorService } from './lib/services/data-author/data-author.service';
 export { DataPageService } from './lib/services/data-page/data-page.service';
 export { DataPostService } from './lib/services/data-post/data-post.service';
+export { DataAuthorService } from './lib/services/data-author/data-author.service';
 export { DataThreadService } from './lib/services/data-thread/data-thread.service';
 export { DataUserService } from './lib/services/data-user/data-user.service';
-export { DataProductService } from './lib/services/data-product/data-product.service';
-export { DataOrderService } from './lib/services/data-order/data-order.service';
-export { DataNotificationService } from './lib/services/data-notification/data-notification.service';
-export { DataPromotionService } from './lib/services/data-promotion/data-promotion.service';
+export { DataOptionService } from './lib/services/data-option/data-option.service';
+export { DataBundleService } from './lib/services/data-bundle/data-bundle.service';
 export { DataAudioService } from './lib/services/data-audio/data-audio.service';
 export { DataVideoService } from './lib/services/data-video/data-video.service';
-export { DataBundleService } from './lib/services/data-bundle/data-bundle.service';
-export { DataOptionService } from './lib/services/data-option/data-option.service';
+export { DataProductService } from './lib/services/data-product/data-product.service';
+export { DataOrderService } from './lib/services/data-order/data-order.service';
+export { DataPropertyService } from './lib/services/data-property/data-property.service';
+export { DataNotificationService } from './lib/services/data-notification/data-notification.service';
+export { DataPromotionService } from './lib/services/data-promotion/data-promotion.service';
 
 // components
 export { OauthPopupComponentModule } from './lib/components/oauth-popup/oauth-popup.module';
