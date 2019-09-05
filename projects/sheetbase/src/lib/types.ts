@@ -7,9 +7,11 @@ export interface Link {
   handler?(): void;
 }
 
-// meta
-
 export type RouterEvents = 'RouteConfigLoadStart' | 'RouteConfigLoadEnd' | 'NavigationEnd';
+
+/**
+ * meta
+ */
 
 export interface CustomMetas {
   title?: string;
@@ -29,7 +31,9 @@ export interface Metas extends CustomMetas {
   fbAppId?: string;
 }
 
-// currency
+/**
+ * currency
+ */
 
 export interface CurrencyConfigs {
   currencyCode?: string;
@@ -42,7 +46,9 @@ export interface CurrencyConfigs {
   estimatedExchangeRate?: number;
 }
 
-// date
+/**
+ * datetime
+ */
 
 export interface DateConfigs {
   format?: string;
