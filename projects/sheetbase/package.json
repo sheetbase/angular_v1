@@ -18,6 +18,6 @@
     "@angular/core": "^8.2.0",
     "@ionic/angular": "^4.7.4",
     "@sheetbase/client": "^1.1.0",
-    "@sheetbase/models": "^1.5.0"
+    "@sheetbase/models": "^1.8.0"
   }
 }
