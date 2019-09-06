@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Filter, DataSegment } from '@sheetbase/client';
-import { Promotion } from '@sheetbase/models';
+import { Option } from '@sheetbase/models';
+import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -14,34 +14,24 @@ export class OptionService {
 
   constructor(private Database: DatabaseService) {}
 
-  all(cacheTime = 1440) {
-    return this.Database.all<Promotion>(this.sheet, cacheTime);
+  all(options: DatabaseMethodOptions = {}) {
+    return this.Database.all<Option>(this.sheet, options);
   }
 
-  items(
-    filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Promotion>(this.sheet, filter, useCached, cacheTime, segment);
+  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.items<Option>(this.sheet, filter, options);
   }
 
-  item(
-    finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.item<Promotion>(this.sheet, finder, useCached, cacheTime, 'clean', segment);
+  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.item<Option>(this.sheet, finder, options);
   }
 
   clearCachedAll() {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Promotion) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }

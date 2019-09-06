@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Filter, DocsContentStyles, DataSegment } from '@sheetbase/client';
 import { Page } from '@sheetbase/models';
+import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -14,113 +14,64 @@ export class PageService {
 
   constructor(private Database: DatabaseService) {}
 
-  all(cacheTime = 1440) {
-    return this.Database.all<Page>(this.sheet, cacheTime);
+  all(options: DatabaseMethodOptions = {}) {
+    return this.Database.all<Page>(this.sheet, options);
   }
 
-  items(
-    filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Page>(this.sheet, filter, useCached, cacheTime, segment);
+  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.items<Page>(this.sheet, filter, options);
   }
 
-  item(
-    finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    docsStyles: DocsContentStyles = 'full',
-    segment: DataSegment = null,
-  ) {
-    return this.Database.item<Page>(this.sheet, finder, useCached, cacheTime, docsStyles, segment);
+  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.item<Page>(this.sheet, finder, options);
   }
 
-  itemsOriginal(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsOriginal<Page>(this.sheet, useCached, cacheTime, segment);
+  itemsOriginal(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsOriginal<Page>(this.sheet, options);
   }
 
-  itemsDraft(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsDraft<Page>(this.sheet, useCached, cacheTime, segment);
+  itemsDraft(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsDraft<Page>(this.sheet, options);
   }
 
-  itemsPublished(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsPublished<Page>(this.sheet, useCached, cacheTime, segment);
+  itemsPublished(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsPublished<Page>(this.sheet, options);
   }
 
-  itemsArchived(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsArchived<Page>(this.sheet, useCached, cacheTime, segment);
+  itemsArchived(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsArchived<Page>(this.sheet, options);
   }
 
-  itemsByType(
-    type: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByType<Page>(this.sheet, type, useCached, cacheTime, segment);
+  itemsByType(type: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByType<Page>(this.sheet, type, options);
   }
 
-  itemsByLocale(
-    locale: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByLocale<Page>(this.sheet, locale, useCached, cacheTime, segment);
+  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByTypeDefault<Page>(this.sheet, options);
   }
 
-  itemsByOrigin(
-    origin: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByOrigin<Page>(this.sheet, origin, useCached, cacheTime, segment);
+  itemsByLocale(locale: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByLocale<Page>(this.sheet, locale, options);
   }
 
-  itemsByMetaExists(
-    metaKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaExists<Page>(this.sheet, metaKey, useCached, cacheTime, segment);
+  itemsByOrigin(origin: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByOrigin<Page>(this.sheet, origin, options);
   }
 
-  itemsByMetaEquals(
-    metaKey: string,
-    equalTo: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaEquals<Page>(this.sheet, metaKey, equalTo, useCached, cacheTime, segment);
+  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaExists<Page>(this.sheet, metaKey, options);
+  }
+
+  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaEquals<Page>(this.sheet, metaKey, equalTo, options);
   }
 
   clearCachedAll() {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Page) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }

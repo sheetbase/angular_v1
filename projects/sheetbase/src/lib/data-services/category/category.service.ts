@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Filter, DataSegment } from '@sheetbase/client';
 import { Category } from '@sheetbase/models';
+import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -14,60 +14,34 @@ export class CategoryService {
 
   constructor(private Database: DatabaseService) {}
 
-  all(cacheTime = 1440) {
-    return this.Database.all<Category>(this.sheet, cacheTime);
+  all(options: DatabaseMethodOptions = {}) {
+    return this.Database.all<Category>(this.sheet, options);
   }
 
-  items(
-    filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Category>(this.sheet, filter, useCached, cacheTime, segment);
+  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.items<Category>(this.sheet, filter, options);
   }
 
-  item(
-    finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.item<Category>(this.sheet, finder, useCached, cacheTime, 'clean', segment);
+  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.item<Category>(this.sheet, finder, options);
   }
 
-  itemsOriginal(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsOriginal<Category>(this.sheet, useCached, cacheTime, segment);
+  itemsOriginal(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsOriginal<Category>(this.sheet, options);
   }
 
-  itemsByLocale(
-    locale: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByLocale<Category>(this.sheet, locale, useCached, cacheTime, segment);
+  itemsByLocale(locale: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByLocale<Category>(this.sheet, locale, options);
   }
 
-  itemsByOrigin(
-    origin: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByOrigin<Category>(this.sheet, origin, useCached, cacheTime, segment);
+  itemsByOrigin(origin: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByOrigin<Category>(this.sheet, origin, options);
   }
 
   itemsByContent(
     contentType: string,
     subType: string = '*',
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
     return this.items(
       (category: Category) => (
@@ -75,37 +49,24 @@ export class CategoryService {
         category.only.indexOf(contentType + ':*') > -1 ||
         category.only.indexOf(contentType + ':' + subType) > -1
       ),
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
-  itemsByMetaExists(
-    metaKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaExists<Category>(this.sheet, metaKey, useCached, cacheTime, segment);
+  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaExists<Category>(this.sheet, metaKey, options);
   }
 
-  itemsByMetaEquals(
-    metaKey: string,
-    equalTo: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaEquals<Category>(this.sheet, metaKey, equalTo, useCached, cacheTime, segment);
+  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaEquals<Category>(this.sheet, metaKey, equalTo, options);
   }
 
   clearCachedAll() {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Category) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }

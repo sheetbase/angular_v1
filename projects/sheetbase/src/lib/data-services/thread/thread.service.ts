@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Filter, DataSegment } from '@sheetbase/client';
 import { Thread } from '@sheetbase/models';
+import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
 
-import { AppService } from '../app/app.service';
-import { ApiService } from '../api/api.service';
+import { AppService } from '../../app-services/app/app.service';
+import { ApiService } from '../../sheetbase-services/api/api.service';
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
 @Injectable({
@@ -20,199 +20,135 @@ export class ThreadService {
     private Database: DatabaseService,
   ) {}
 
-  all(cacheTime = 1440) {
-    return this.Database.all<Thread>(this.sheet, cacheTime);
+  all(options: DatabaseMethodOptions = {}) {
+    return this.Database.all<Thread>(this.sheet, options);
   }
 
-  items(
-    filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Thread>(this.sheet, filter, useCached, cacheTime, segment);
+  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.items<Thread>(this.sheet, filter, options);
   }
 
-  item(
-    finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.item<Thread>(this.sheet, finder, useCached, cacheTime, 'clean', segment);
+  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.item<Thread>(this.sheet, finder, options);
   }
 
-  itemsDraft(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsDraft<Thread>(this.sheet, useCached, cacheTime, segment);
+  itemsOriginal(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsOriginal<Thread>(this.sheet, options);
   }
 
-  itemsPublished(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsPublished<Thread>(this.sheet, useCached, cacheTime, segment);
+  itemsDraft(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsDraft<Thread>(this.sheet, options);
   }
 
-  itemsArchived(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsArchived<Thread>(this.sheet, useCached, cacheTime, segment);
+  itemsPublished(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsPublished<Thread>(this.sheet, options);
   }
 
-  itemsTopLevel(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Thread>(
-      this.sheet,
+  itemsArchived(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsArchived<Thread>(this.sheet, options);
+  }
+
+  itemsTopLevel(options: DatabaseMethodOptions = {}) {
+    return this.items(
       (item: Thread) => !item.parent,
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
-  itemsStandalone(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Thread>(
-      this.sheet,
+  itemsStandalone(options: DatabaseMethodOptions = {}) {
+    return this.items(
       (item: Thread) => !item.master,
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
-  itemsByType(
-    type: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByType<Thread>(this.sheet, type, useCached, cacheTime, segment);
+  itemsByType(type: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByType<Thread>(this.sheet, type, options);
+  }
+
+  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByTypeDefault<Thread>(this.sheet, options);
   }
 
   itemsByMaster(
     contentType: string,
     masterKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return this.Database.items<Thread>(
-      this.sheet,
+    return this.items(
       (item: Thread) => (
         !!item.master &&
         item.master === `${contentType}:${masterKey}`
       ),
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
   itemsByThread(
     threadKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return this.Database.items<Thread>(
-      this.sheet,
+    return this.items(
       (item: Thread) => (
         !!item.parent &&
         item.parent === threadKey
       ),
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
   itemsByUid(
     uid: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return this.Database.items<Thread>(
-      this.sheet,
+    return this.items(
       (item: Thread) => (
         !!item.uid &&
         item.uid === uid
       ),
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
   itemsByEmail(
     email: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return this.Database.items<Thread>(
-      this.sheet,
+    return this.items(
       (item: Thread) => (
         !!item.email &&
         item.email === email
       ),
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
-  itemsByMetaExists(
-    metaKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaExists<Thread>(this.sheet, metaKey, useCached, cacheTime, segment);
+  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaExists<Thread>(this.sheet, metaKey, options);
   }
 
-  itemsByMetaEquals(
-    metaKey: string,
-    equalTo: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaEquals<Thread>(this.sheet, metaKey, equalTo, useCached, cacheTime, segment);
+  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaEquals<Thread>(this.sheet, metaKey, equalTo, options);
   }
 
-  updateView(key: string) {
-    return this.Database.updateView(this.sheet, key);
+  viewing(key: string) {
+    return this.Database.viewing(this.sheet, key);
   }
 
-  updateLike(key: string) {
-    return this.Database.updateLike(this.sheet, key);
+  liking(key: string) {
+    return this.Database.liking(this.sheet, key);
   }
 
-  updateComment(key: string) {
-    return this.Database.updateComment(this.sheet, key);
+  commenting(key: string) {
+    return this.Database.commenting(this.sheet, key);
   }
 
-  rate(key: string, stars: number) {
-    return this.Database.rate(this.sheet, key, stars);
+  rating(key: string, stars: number) {
+    return this.Database.rating(this.sheet, key, stars);
   }
 
-  share(key: string, providers: string[] = []) {
-    return this.Database.share(this.sheet, key, providers);
+  sharing(key: string, providers: string[] = []) {
+    return this.Database.sharing(this.sheet, key, providers);
   }
 
   add(item: Thread) {
@@ -230,8 +166,8 @@ export class ThreadService {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Thread) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }

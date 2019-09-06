@@ -3,7 +3,7 @@ import { from, Observable } from 'rxjs';
 
 import { UserProfile } from '@sheetbase/models';
 
-import { ApiService } from '../api/api.service';
+import { ApiService } from '../../sheetbase-services/api/api.service';
 
 @Injectable({
   providedIn: 'root'

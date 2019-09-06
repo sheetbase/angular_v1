@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Filter, DocsContentStyles, DataSegment } from '@sheetbase/client';
 import { Video } from '@sheetbase/models';
+import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -14,178 +14,108 @@ export class VideoService {
 
   constructor(private Database: DatabaseService) {}
 
-  all(cacheTime = 1440) {
-    return this.Database.all<Video>(this.sheet, cacheTime);
+  all(options: DatabaseMethodOptions = {}) {
+    return this.Database.all<Video>(this.sheet, options);
   }
 
-  items(
-    filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Video>(this.sheet, filter, useCached, cacheTime, segment);
+  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.items<Video>(this.sheet, filter, options);
   }
 
-  item(
-    finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    docsStyles: DocsContentStyles = 'full',
-    segment: DataSegment = null,
-  ) {
-    return this.Database.item<Video>(this.sheet, finder, useCached, cacheTime, docsStyles, segment);
+  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.item<Video>(this.sheet, finder, options);
   }
 
-  itemsOriginal(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsOriginal<Video>(this.sheet, useCached, cacheTime, segment);
+  itemsOriginal(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsOriginal<Video>(this.sheet, options);
   }
 
-  itemsDraft(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsDraft<Video>(this.sheet, useCached, cacheTime, segment);
+  itemsDraft(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsDraft<Video>(this.sheet, options);
   }
 
-  itemsPublished(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsPublished<Video>(this.sheet, useCached, cacheTime, segment);
+  itemsPublished(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsPublished<Video>(this.sheet, options);
   }
 
-  itemsArchived(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsArchived<Video>(this.sheet, useCached, cacheTime, segment);
+  itemsArchived(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsArchived<Video>(this.sheet, options);
   }
 
-  itemsByType(
-    type: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByType<Video>(this.sheet, type, useCached, cacheTime, segment);
+  itemsByRelated(baseItem: Video, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByRelated<Video>(this.sheet, baseItem, options);
   }
 
-  itemsByAuthor(
-    authorKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByAuthor<Video>(this.sheet, authorKey, useCached, cacheTime, segment);
+  itemsByType(type: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByType<Video>(this.sheet, type, options);
   }
 
-  itemsByLocale(
-    locale: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByLocale<Video>(this.sheet, locale, useCached, cacheTime, segment);
+  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByTypeDefault<Video>(this.sheet, options);
   }
 
-  itemsByOrigin(
-    origin: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByOrigin<Video>(this.sheet, origin, useCached, cacheTime, segment);
+  itemsByAuthor(authorKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByAuthor<Video>(this.sheet, authorKey, options);
   }
 
-  itemsByParent(
-    parentKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByParent<Video>(this.sheet, parentKey, useCached, cacheTime, segment);
+  itemsByLocale(locale: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByLocale<Video>(this.sheet, locale, options);
   }
 
-  itemsByCategory(
-    categoryKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByCategory<Video>(this.sheet, categoryKey, useCached, cacheTime, segment);
+  itemsByOrigin(origin: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByOrigin<Video>(this.sheet, origin, options);
   }
 
-  itemsByTag(
-    tagKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByTag<Video>(this.sheet, tagKey, useCached, cacheTime, segment);
+  itemsByParent(parentKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByParent<Video>(this.sheet, parentKey, options);
   }
 
-  itemsByKeyword(
-    keyword: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByKeyword<Video>(this.sheet, keyword, useCached, cacheTime, segment);
+  itemsByCategory(categoryKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByCategory<Video>(this.sheet, categoryKey, options);
   }
 
-  itemsByMetaExists(
-    metaKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaExists<Video>(this.sheet, metaKey, useCached, cacheTime, segment);
+  itemsByTag(tagKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByTag<Video>(this.sheet, tagKey, options);
   }
 
-  itemsByMetaEquals(
-    metaKey: string,
-    equalTo: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaEquals<Video>(this.sheet, metaKey, equalTo, useCached, cacheTime, segment);
+  itemsByKeyword(keyword: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByKeyword<Video>(this.sheet, keyword, options);
   }
 
-  updateView(key: string) {
-    return this.Database.updateView(this.sheet, key);
+  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaExists<Video>(this.sheet, metaKey, options);
   }
 
-  updateLike(key: string) {
-    return this.Database.updateLike(this.sheet, key);
+  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaEquals<Video>(this.sheet, metaKey, equalTo, options);
   }
 
-  updateComment(key: string) {
-    return this.Database.updateComment(this.sheet, key);
+  viewing(key: string) {
+    return this.Database.viewing(this.sheet, key);
   }
 
-  rate(key: string, stars: number) {
-    return this.Database.rate(this.sheet, key, stars);
+  liking(key: string) {
+    return this.Database.liking(this.sheet, key);
   }
 
-  share(key: string, providers: string[] = []) {
-    return this.Database.share(this.sheet, key, providers);
+  commenting(key: string) {
+    return this.Database.commenting(this.sheet, key);
+  }
+
+  rating(key: string, stars: number) {
+    return this.Database.rating(this.sheet, key, stars);
+  }
+
+  sharing(key: string, providers: string[] = []) {
+    return this.Database.sharing(this.sheet, key, providers);
   }
 
   clearCachedAll() {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Video) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }

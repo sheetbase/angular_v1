@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Filter, DataSegment } from '@sheetbase/client';
 import { Order } from '@sheetbase/models';
+import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
 
-import { AppService } from '../app/app.service';
-import { ApiService } from '../api/api.service';
+import { AppService } from '../../app-services/app/app.service';
+import { ApiService } from '../../sheetbase-services/api/api.service';
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
 @Injectable({
@@ -20,102 +20,57 @@ export class OrderService {
     private Database: DatabaseService,
   ) {}
 
-  items(
-    filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Order>(this.sheet, filter, useCached, cacheTime, segment);
+  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.items<Order>(this.sheet, filter, options);
   }
 
-  item(
-    finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.item<Order>(this.sheet, finder, useCached, cacheTime, 'clean', segment);
+  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.item<Order>(this.sheet, finder, options);
   }
 
-  itemsDraft(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsDraft<Order>(this.sheet, useCached, cacheTime, segment);
+  itemsDraft(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsDraft<Order>(this.sheet, options);
   }
 
-  itemsPublished(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsPublished<Order>(this.sheet, useCached, cacheTime, segment);
+  itemsPublished(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsPublished<Order>(this.sheet, options);
   }
 
-  itemsArchived(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsArchived<Order>(this.sheet, useCached, cacheTime, segment);
+  itemsArchived(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsArchived<Order>(this.sheet, options);
   }
 
-  itemsStageNew(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.itemsByStage('new', useCached, cacheTime, segment);
+  itemsStageNew(options: DatabaseMethodOptions = {}) {
+    return this.itemsByStage('new', options);
   }
 
-  itemsStageConfirmed(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.itemsByStage('confirmed', useCached, cacheTime, segment);
+  itemsStageConfirmed(options: DatabaseMethodOptions = {}) {
+    return this.itemsByStage('confirmed', options);
   }
 
-  itemsStageDelivering(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.itemsByStage('delivering', useCached, cacheTime, segment);
+  itemsStageDelivering(options: DatabaseMethodOptions = {}) {
+    return this.itemsByStage('delivering', options);
   }
 
-  itemsStageDone(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.itemsByStage('done', useCached, cacheTime, segment);
+  itemsStageDone(options: DatabaseMethodOptions = {}) {
+    return this.itemsByStage('done', options);
   }
 
-  itemsStageCancelled(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.itemsByStage('cancelled', useCached, cacheTime, segment);
+  itemsStageCancelled(options: DatabaseMethodOptions = {}) {
+    return this.itemsByStage('cancelled', options);
   }
 
-  itemsByType(
-    type: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByType<Order>(this.sheet, type, useCached, cacheTime, segment);
+  itemsByType(type: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByType<Order>(this.sheet, type, options);
+  }
+
+  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByTypeDefault<Order>(this.sheet, options);
   }
 
   itemsByStage(
     stage: 'new' | 'confirmed' | 'delivering' | 'done' | 'cancelled',
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
     return this.Database.items<Order>(
       this.sheet,
@@ -123,65 +78,38 @@ export class OrderService {
         !!item.stage &&
         item.stage === stage
       ),
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
-  itemsByUid(
-    uid: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
+  itemsByUid(uid: string, options: DatabaseMethodOptions = {}) {
     return this.Database.items<Order>(
       this.sheet,
       (item: Order) => (
         !!item.uid &&
         item.uid === uid
       ),
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
-  itemsByEmail(
-    email: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
+  itemsByEmail(email: string, options: DatabaseMethodOptions = {}) {
     return this.Database.items<Order>(
       this.sheet,
       (item: Order) => (
         !!item.email &&
         item.email === email
       ),
-      useCached,
-      cacheTime,
-      segment,
+      options,
     );
   }
 
-  itemsByMetaExists(
-    metaKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaExists<Order>(this.sheet, metaKey, useCached, cacheTime, segment);
+  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaExists<Order>(this.sheet, metaKey, options);
   }
 
-  itemsByMetaEquals(
-    metaKey: string,
-    equalTo: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaEquals<Order>(this.sheet, metaKey, equalTo, useCached, cacheTime, segment);
+  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaEquals<Order>(this.sheet, metaKey, equalTo, options);
   }
 
   add(item: Order) {
@@ -199,8 +127,8 @@ export class OrderService {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Order) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }

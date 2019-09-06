@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Filter, DocsContentStyles, DataSegment } from '@sheetbase/client';
 import { Bundle } from '@sheetbase/models';
+import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -14,178 +14,104 @@ export class BundleService {
 
   constructor(private Database: DatabaseService) {}
 
-  all(cacheTime = 1440) {
-    return this.Database.all<Bundle>(this.sheet, cacheTime);
+  all(options: DatabaseMethodOptions = {}) {
+    return this.Database.all<Bundle>(this.sheet, options);
   }
 
-  items(
-    filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Bundle>(this.sheet, filter, useCached, cacheTime, segment);
+  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.items<Bundle>(this.sheet, filter, options);
   }
 
-  item(
-    finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    docsStyles: DocsContentStyles = 'full',
-    segment: DataSegment = null,
-  ) {
-    return this.Database.item<Bundle>(this.sheet, finder, useCached, cacheTime, docsStyles, segment);
+  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.item<Bundle>(this.sheet, finder, options);
   }
 
-  itemsOriginal(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsOriginal<Bundle>(this.sheet, useCached, cacheTime, segment);
+  itemsOriginal(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsOriginal<Bundle>(this.sheet, options);
   }
 
-  itemsDraft(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsDraft<Bundle>(this.sheet, useCached, cacheTime, segment);
+  itemsDraft(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsDraft<Bundle>(this.sheet, options);
   }
 
-  itemsPublished(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsPublished<Bundle>(this.sheet, useCached, cacheTime, segment);
+  itemsPublished(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsPublished<Bundle>(this.sheet, options);
   }
 
-  itemsArchived(
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsArchived<Bundle>(this.sheet, useCached, cacheTime, segment);
+  itemsArchived(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsArchived<Bundle>(this.sheet, options);
   }
 
-  itemsByType(
-    type: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByType<Bundle>(this.sheet, type, useCached, cacheTime, segment);
+  itemsByRelated(baseItem: Bundle, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByRelated<Bundle>(this.sheet, baseItem, options);
   }
 
-  itemsByAuthor(
-    authorKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByAuthor<Bundle>(this.sheet, authorKey, useCached, cacheTime, segment);
+  itemsByType(type: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByType<Bundle>(this.sheet, type, options);
   }
 
-  itemsByLocale(
-    locale: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByLocale<Bundle>(this.sheet, locale, useCached, cacheTime, segment);
+  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByTypeDefault<Bundle>(this.sheet, options);
   }
 
-  itemsByOrigin(
-    origin: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByOrigin<Bundle>(this.sheet, origin, useCached, cacheTime, segment);
+  itemsByAuthor(authorKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByAuthor<Bundle>(this.sheet, authorKey, options);
   }
 
-  itemsByParent(
-    parentKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByParent<Bundle>(this.sheet, parentKey, useCached, cacheTime, segment);
+  itemsByLocale(locale: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByLocale<Bundle>(this.sheet, locale, options);
   }
 
-  itemsByCategory(
-    categoryKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByCategory<Bundle>(this.sheet, categoryKey, useCached, cacheTime, segment);
+  itemsByOrigin(origin: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByOrigin<Bundle>(this.sheet, origin, options);
   }
 
-  itemsByTag(
-    tagKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByTag<Bundle>(this.sheet, tagKey, useCached, cacheTime, segment);
+  itemsByCategory(categoryKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByCategory<Bundle>(this.sheet, categoryKey, options);
   }
 
-  itemsByKeyword(
-    keyword: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByKeyword<Bundle>(this.sheet, keyword, useCached, cacheTime, segment);
+  itemsByTag(tagKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByTag<Bundle>(this.sheet, tagKey, options);
   }
 
-  itemsByMetaExists(
-    metaKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaExists<Bundle>(this.sheet, metaKey, useCached, cacheTime, segment);
+  itemsByKeyword(keyword: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByKeyword<Bundle>(this.sheet, keyword, options);
   }
 
-  itemsByMetaEquals(
-    metaKey: string,
-    equalTo: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.itemsByMetaEquals<Bundle>(this.sheet, metaKey, equalTo, useCached, cacheTime, segment);
+  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaExists<Bundle>(this.sheet, metaKey, options);
   }
 
-  updateView(key: string) {
-    return this.Database.updateView(this.sheet, key);
+  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByMetaEquals<Bundle>(this.sheet, metaKey, equalTo, options);
   }
 
-  updateLike(key: string) {
-    return this.Database.updateLike(this.sheet, key);
+  viewing(key: string) {
+    return this.Database.viewing(this.sheet, key);
   }
 
-  updateComment(key: string) {
-    return this.Database.updateComment(this.sheet, key);
+  liking(key: string) {
+    return this.Database.liking(this.sheet, key);
   }
 
-  rate(key: string, stars: number) {
-    return this.Database.rate(this.sheet, key, stars);
+  commenting(key: string) {
+    return this.Database.commenting(this.sheet, key);
   }
 
-  share(key: string, providers: string[] = []) {
-    return this.Database.share(this.sheet, key, providers);
+  rating(key: string, stars: number) {
+    return this.Database.rating(this.sheet, key, stars);
+  }
+
+  sharing(key: string, providers: string[] = []) {
+    return this.Database.sharing(this.sheet, key, providers);
   }
 
   clearCachedAll() {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Bundle) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Filter, DataSegment } from '@sheetbase/client';
 import { Property } from '@sheetbase/models';
+import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
 
-import { AppService } from '../app/app.service';
-import { ApiService } from '../api/api.service';
+import { AppService } from '../../app-services/app/app.service';
+import { ApiService } from '../../sheetbase-services/api/api.service';
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
 @Injectable({
@@ -20,22 +20,12 @@ export class PropertyService {
     private Database: DatabaseService,
   ) {}
 
-  items(
-    filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.items<Property>(this.sheet, filter, useCached, cacheTime, segment);
+  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.items<Property>(this.sheet, filter, options);
   }
 
-  item(
-    finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return this.Database.item<Property>(this.sheet, finder, useCached, cacheTime, 'clean', segment);
+  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+    return this.Database.item<Property>(this.sheet, finder, options);
   }
 
   add(item: Property) {
@@ -43,7 +33,7 @@ export class PropertyService {
   }
 
   update(key: string, data: Property) {
-    return this.Database.update(this.sheet, null, data);
+    return this.Database.update(this.sheet, key, data);
   }
 
   addExtra(item: Property, endpoint = '/app/property') {
@@ -57,8 +47,8 @@ export class PropertyService {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Property) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }

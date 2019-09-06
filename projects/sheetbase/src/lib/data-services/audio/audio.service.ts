@@ -42,8 +42,16 @@ export class AudioService {
     return this.Database.itemsArchived<Audio>(this.sheet, options);
   }
 
+  itemsByRelated(baseItem: Audio, options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByRelated<Audio>(this.sheet, baseItem, options);
+  }
+
   itemsByType(type: string, options: DatabaseMethodOptions = {}) {
     return this.Database.itemsByType<Audio>(this.sheet, type, options);
+  }
+
+  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+    return this.Database.itemsByTypeDefault<Audio>(this.sheet, options);
   }
 
   itemsByAuthor(authorKey: string, options: DatabaseMethodOptions = {}) {
@@ -86,32 +94,32 @@ export class AudioService {
     return this.Database.itemsByMetaEquals<Audio>(this.sheet, metaKey, equalTo, options);
   }
 
-  updateView(key: string) {
-    return this.Database.updateView(this.sheet, key);
+  viewing(key: string) {
+    return this.Database.viewing(this.sheet, key);
   }
 
-  updateLike(key: string) {
-    return this.Database.updateLike(this.sheet, key);
+  liking(key: string) {
+    return this.Database.liking(this.sheet, key);
   }
 
-  updateComment(key: string) {
-    return this.Database.updateComment(this.sheet, key);
+  commenting(key: string) {
+    return this.Database.commenting(this.sheet, key);
   }
 
-  rate(key: string, stars: number) {
-    return this.Database.rate(this.sheet, key, stars);
+  rating(key: string, stars: number) {
+    return this.Database.rating(this.sheet, key, stars);
   }
 
-  share(key: string, providers: string[] = []) {
-    return this.Database.share(this.sheet, key, providers);
+  sharing(key: string, providers: string[] = []) {
+    return this.Database.sharing(this.sheet, key, providers);
   }
 
   clearCachedAll() {
     return this.Database.clearCachedAll(this.sheet);
   }
 
-  clearCachedItem(item: Audio) {
-    return this.Database.clearCachedItem(this.sheet, item);
+  clearCachedItem(key: string) {
+    return this.Database.clearCachedItem(this.sheet, key);
   }
 
 }
