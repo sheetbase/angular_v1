@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Order } from '@sheetbase/models';
-import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
+import { Filter, ItemsOptions, ItemOptions } from '@sheetbase/client';
 
 import { AppService } from '../../app-services/app/app.service';
 import { ApiService } from '../../sheetbase-services/api/api.service';
@@ -20,57 +20,57 @@ export class OrderService {
     private Database: DatabaseService,
   ) {}
 
-  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+  items(filter?: Filter, options?: ItemsOptions) {
     return this.Database.items<Order>(this.sheet, filter, options);
   }
 
-  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+  item(finder: string | Filter, options?: ItemOptions) {
     return this.Database.item<Order>(this.sheet, finder, options);
   }
 
-  itemsDraft(options: DatabaseMethodOptions = {}) {
+  itemsDraft(options?: ItemsOptions) {
     return this.Database.itemsDraft<Order>(this.sheet, options);
   }
 
-  itemsPublished(options: DatabaseMethodOptions = {}) {
+  itemsPublished(options?: ItemsOptions) {
     return this.Database.itemsPublished<Order>(this.sheet, options);
   }
 
-  itemsArchived(options: DatabaseMethodOptions = {}) {
+  itemsArchived(options?: ItemsOptions) {
     return this.Database.itemsArchived<Order>(this.sheet, options);
   }
 
-  itemsStageNew(options: DatabaseMethodOptions = {}) {
+  itemsStageNew(options?: ItemsOptions) {
     return this.itemsByStage('new', options);
   }
 
-  itemsStageConfirmed(options: DatabaseMethodOptions = {}) {
+  itemsStageConfirmed(options?: ItemsOptions) {
     return this.itemsByStage('confirmed', options);
   }
 
-  itemsStageDelivering(options: DatabaseMethodOptions = {}) {
+  itemsStageDelivering(options?: ItemsOptions) {
     return this.itemsByStage('delivering', options);
   }
 
-  itemsStageDone(options: DatabaseMethodOptions = {}) {
+  itemsStageDone(options?: ItemsOptions) {
     return this.itemsByStage('done', options);
   }
 
-  itemsStageCancelled(options: DatabaseMethodOptions = {}) {
+  itemsStageCancelled(options?: ItemsOptions) {
     return this.itemsByStage('cancelled', options);
   }
 
-  itemsByType(type: string, options: DatabaseMethodOptions = {}) {
+  itemsByType(type: string, options?: ItemsOptions) {
     return this.Database.itemsByType<Order>(this.sheet, type, options);
   }
 
-  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+  itemsByTypeDefault(options?: ItemsOptions) {
     return this.Database.itemsByTypeDefault<Order>(this.sheet, options);
   }
 
   itemsByStage(
     stage: 'new' | 'confirmed' | 'delivering' | 'done' | 'cancelled',
-    options: DatabaseMethodOptions = {},
+    options?: ItemsOptions,
   ) {
     return this.Database.items<Order>(
       this.sheet,
@@ -82,7 +82,7 @@ export class OrderService {
     );
   }
 
-  itemsByUid(uid: string, options: DatabaseMethodOptions = {}) {
+  itemsByUid(uid: string, options?: ItemsOptions) {
     return this.Database.items<Order>(
       this.sheet,
       (item: Order) => (
@@ -93,7 +93,7 @@ export class OrderService {
     );
   }
 
-  itemsByEmail(email: string, options: DatabaseMethodOptions = {}) {
+  itemsByEmail(email: string, options?: ItemsOptions) {
     return this.Database.items<Order>(
       this.sheet,
       (item: Order) => (
@@ -104,11 +104,11 @@ export class OrderService {
     );
   }
 
-  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+  itemsByMetaExists(metaKey: string, options?: ItemsOptions) {
     return this.Database.itemsByMetaExists<Order>(this.sheet, metaKey, options);
   }
 
-  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+  itemsByMetaEquals(metaKey: string, equalTo: string, options?: ItemsOptions) {
     return this.Database.itemsByMetaEquals<Order>(this.sheet, metaKey, equalTo, options);
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Notification } from '@sheetbase/models';
-import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
+import { Filter, ItemsOptions, ItemOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -14,35 +14,35 @@ export class NotificationService {
 
   constructor(private Database: DatabaseService) {}
 
-  all(options: DatabaseMethodOptions = {}) {
-    return this.Database.all<Notification>(this.sheet, options);
+  all(cacheTime?: number) {
+    return this.Database.all<Notification>(this.sheet, cacheTime);
   }
 
-  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+  items(filter?: Filter, options?: ItemsOptions) {
     return this.Database.items<Notification>(this.sheet, filter, options);
   }
 
-  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+  item(finder: string | Filter, options?: ItemOptions) {
     return this.Database.item<Notification>(this.sheet, finder, options);
   }
 
-  itemsOriginal(options: DatabaseMethodOptions = {}) {
+  itemsOriginal(options?: ItemsOptions) {
     return this.Database.itemsOriginal<Notification>(this.sheet, options);
   }
 
-  itemsByLocale(locale: string, options: DatabaseMethodOptions = {}) {
+  itemsByLocale(locale: string, options?: ItemsOptions) {
     return this.Database.itemsByLocale<Notification>(this.sheet, locale, options);
   }
 
-  itemsByOrigin(origin: string, options: DatabaseMethodOptions = {}) {
+  itemsByOrigin(origin: string, options?: ItemsOptions) {
     return this.Database.itemsByOrigin<Notification>(this.sheet, origin, options);
   }
 
-  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+  itemsByMetaExists(metaKey: string, options?: ItemsOptions) {
     return this.Database.itemsByMetaExists<Notification>(this.sheet, metaKey, options);
   }
 
-  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+  itemsByMetaEquals(metaKey: string, equalTo: string, options?: ItemsOptions) {
     return this.Database.itemsByMetaEquals<Notification>(this.sheet, metaKey, equalTo, options);
   }
 

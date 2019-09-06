@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Thread } from '@sheetbase/models';
-import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
+import { Filter, ItemsOptions, ItemOptions } from '@sheetbase/client';
 
 import { AppService } from '../../app-services/app/app.service';
 import { ApiService } from '../../sheetbase-services/api/api.service';
@@ -20,60 +20,60 @@ export class ThreadService {
     private Database: DatabaseService,
   ) {}
 
-  all(options: DatabaseMethodOptions = {}) {
-    return this.Database.all<Thread>(this.sheet, options);
+  all(cacheTime?: number) {
+    return this.Database.all<Thread>(this.sheet, cacheTime);
   }
 
-  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+  items(filter?: Filter, options?: ItemsOptions) {
     return this.Database.items<Thread>(this.sheet, filter, options);
   }
 
-  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+  item(finder: string | Filter, options?: ItemOptions) {
     return this.Database.item<Thread>(this.sheet, finder, options);
   }
 
-  itemsOriginal(options: DatabaseMethodOptions = {}) {
+  itemsOriginal(options?: ItemsOptions) {
     return this.Database.itemsOriginal<Thread>(this.sheet, options);
   }
 
-  itemsDraft(options: DatabaseMethodOptions = {}) {
+  itemsDraft(options?: ItemsOptions) {
     return this.Database.itemsDraft<Thread>(this.sheet, options);
   }
 
-  itemsPublished(options: DatabaseMethodOptions = {}) {
+  itemsPublished(options?: ItemsOptions) {
     return this.Database.itemsPublished<Thread>(this.sheet, options);
   }
 
-  itemsArchived(options: DatabaseMethodOptions = {}) {
+  itemsArchived(options?: ItemsOptions) {
     return this.Database.itemsArchived<Thread>(this.sheet, options);
   }
 
-  itemsTopLevel(options: DatabaseMethodOptions = {}) {
+  itemsTopLevel(options?: ItemsOptions) {
     return this.items(
       (item: Thread) => !item.parent,
       options,
     );
   }
 
-  itemsStandalone(options: DatabaseMethodOptions = {}) {
+  itemsStandalone(options?: ItemsOptions) {
     return this.items(
       (item: Thread) => !item.master,
       options,
     );
   }
 
-  itemsByType(type: string, options: DatabaseMethodOptions = {}) {
+  itemsByType(type: string, options?: ItemsOptions) {
     return this.Database.itemsByType<Thread>(this.sheet, type, options);
   }
 
-  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+  itemsByTypeDefault(options?: ItemsOptions) {
     return this.Database.itemsByTypeDefault<Thread>(this.sheet, options);
   }
 
   itemsByMaster(
     contentType: string,
     masterKey: string,
-    options: DatabaseMethodOptions = {},
+    options?: ItemsOptions,
   ) {
     return this.items(
       (item: Thread) => (
@@ -86,7 +86,7 @@ export class ThreadService {
 
   itemsByThread(
     threadKey: string,
-    options: DatabaseMethodOptions = {},
+    options?: ItemsOptions,
   ) {
     return this.items(
       (item: Thread) => (
@@ -99,7 +99,7 @@ export class ThreadService {
 
   itemsByUid(
     uid: string,
-    options: DatabaseMethodOptions = {},
+    options?: ItemsOptions,
   ) {
     return this.items(
       (item: Thread) => (
@@ -112,7 +112,7 @@ export class ThreadService {
 
   itemsByEmail(
     email: string,
-    options: DatabaseMethodOptions = {},
+    options?: ItemsOptions,
   ) {
     return this.items(
       (item: Thread) => (
@@ -123,11 +123,11 @@ export class ThreadService {
     );
   }
 
-  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+  itemsByMetaExists(metaKey: string, options?: ItemsOptions) {
     return this.Database.itemsByMetaExists<Thread>(this.sheet, metaKey, options);
   }
 
-  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+  itemsByMetaEquals(metaKey: string, equalTo: string, options?: ItemsOptions) {
     return this.Database.itemsByMetaEquals<Thread>(this.sheet, metaKey, equalTo, options);
   }
 

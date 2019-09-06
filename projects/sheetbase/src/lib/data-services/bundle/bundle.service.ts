@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Bundle } from '@sheetbase/models';
-import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
+import { Filter, ItemsOptions, ItemOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -14,75 +14,75 @@ export class BundleService {
 
   constructor(private Database: DatabaseService) {}
 
-  all(options: DatabaseMethodOptions = {}) {
-    return this.Database.all<Bundle>(this.sheet, options);
+  all(cacheTime?: number) {
+    return this.Database.all<Bundle>(this.sheet, cacheTime);
   }
 
-  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+  items(filter?: Filter, options?: ItemsOptions) {
     return this.Database.items<Bundle>(this.sheet, filter, options);
   }
 
-  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+  item(finder: string | Filter, options?: ItemOptions) {
     return this.Database.item<Bundle>(this.sheet, finder, options);
   }
 
-  itemsOriginal(options: DatabaseMethodOptions = {}) {
+  itemsOriginal(options?: ItemsOptions) {
     return this.Database.itemsOriginal<Bundle>(this.sheet, options);
   }
 
-  itemsDraft(options: DatabaseMethodOptions = {}) {
+  itemsDraft(options?: ItemsOptions) {
     return this.Database.itemsDraft<Bundle>(this.sheet, options);
   }
 
-  itemsPublished(options: DatabaseMethodOptions = {}) {
+  itemsPublished(options?: ItemsOptions) {
     return this.Database.itemsPublished<Bundle>(this.sheet, options);
   }
 
-  itemsArchived(options: DatabaseMethodOptions = {}) {
+  itemsArchived(options?: ItemsOptions) {
     return this.Database.itemsArchived<Bundle>(this.sheet, options);
   }
 
-  itemsByRelated(baseItem: Bundle, options: DatabaseMethodOptions = {}) {
+  itemsByRelated(baseItem: Bundle, options?: ItemsOptions) {
     return this.Database.itemsByRelated<Bundle>(this.sheet, baseItem, options);
   }
 
-  itemsByType(type: string, options: DatabaseMethodOptions = {}) {
+  itemsByType(type: string, options?: ItemsOptions) {
     return this.Database.itemsByType<Bundle>(this.sheet, type, options);
   }
 
-  itemsByTypeDefault(options: DatabaseMethodOptions = {}) {
+  itemsByTypeDefault(options?: ItemsOptions) {
     return this.Database.itemsByTypeDefault<Bundle>(this.sheet, options);
   }
 
-  itemsByAuthor(authorKey: string, options: DatabaseMethodOptions = {}) {
+  itemsByAuthor(authorKey: string, options?: ItemsOptions) {
     return this.Database.itemsByAuthor<Bundle>(this.sheet, authorKey, options);
   }
 
-  itemsByLocale(locale: string, options: DatabaseMethodOptions = {}) {
+  itemsByLocale(locale: string, options?: ItemsOptions) {
     return this.Database.itemsByLocale<Bundle>(this.sheet, locale, options);
   }
 
-  itemsByOrigin(origin: string, options: DatabaseMethodOptions = {}) {
+  itemsByOrigin(origin: string, options?: ItemsOptions) {
     return this.Database.itemsByOrigin<Bundle>(this.sheet, origin, options);
   }
 
-  itemsByCategory(categoryKey: string, options: DatabaseMethodOptions = {}) {
+  itemsByCategory(categoryKey: string, options?: ItemsOptions) {
     return this.Database.itemsByCategory<Bundle>(this.sheet, categoryKey, options);
   }
 
-  itemsByTag(tagKey: string, options: DatabaseMethodOptions = {}) {
+  itemsByTag(tagKey: string, options?: ItemsOptions) {
     return this.Database.itemsByTag<Bundle>(this.sheet, tagKey, options);
   }
 
-  itemsByKeyword(keyword: string, options: DatabaseMethodOptions = {}) {
+  itemsByKeyword(keyword: string, options?: ItemsOptions) {
     return this.Database.itemsByKeyword<Bundle>(this.sheet, keyword, options);
   }
 
-  itemsByMetaExists(metaKey: string, options: DatabaseMethodOptions = {}) {
+  itemsByMetaExists(metaKey: string, options?: ItemsOptions) {
     return this.Database.itemsByMetaExists<Bundle>(this.sheet, metaKey, options);
   }
 
-  itemsByMetaEquals(metaKey: string, equalTo: string, options: DatabaseMethodOptions = {}) {
+  itemsByMetaEquals(metaKey: string, equalTo: string, options?: ItemsOptions) {
     return this.Database.itemsByMetaEquals<Bundle>(this.sheet, metaKey, equalTo, options);
   }
 

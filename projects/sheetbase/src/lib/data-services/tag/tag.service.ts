@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Tag } from '@sheetbase/models';
-import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
+import { Filter, ItemsOptions, ItemOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -16,15 +16,15 @@ export class TagService {
     private Database: DatabaseService,
   ) {}
 
-  all(options: DatabaseMethodOptions = {}) {
-    return this.Database.all<Tag>(this.sheet, options);
+  all(cacheTime?: number) {
+    return this.Database.all<Tag>(this.sheet, cacheTime);
   }
 
-  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+  items(filter?: Filter, options?: ItemsOptions) {
     return this.Database.items<Tag>(this.sheet, filter, options);
   }
 
-  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+  item(finder: string | Filter, options?: ItemOptions) {
     return this.Database.item<Tag>(this.sheet, finder, options);
   }
 

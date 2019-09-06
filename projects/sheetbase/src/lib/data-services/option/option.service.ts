@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Option } from '@sheetbase/models';
-import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
+import { Filter, ItemsOptions, ItemOptions } from '@sheetbase/client';
 
 import { DatabaseService } from '../../sheetbase-services/database/database.service';
 
@@ -14,15 +14,15 @@ export class OptionService {
 
   constructor(private Database: DatabaseService) {}
 
-  all(options: DatabaseMethodOptions = {}) {
-    return this.Database.all<Option>(this.sheet, options);
+  all(cacheTime?: number) {
+    return this.Database.all<Option>(this.sheet, cacheTime);
   }
 
-  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+  items(filter?: Filter, options?: ItemsOptions) {
     return this.Database.items<Option>(this.sheet, filter, options);
   }
 
-  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+  item(finder: string | Filter, options?: ItemOptions) {
     return this.Database.item<Option>(this.sheet, finder, options);
   }
 

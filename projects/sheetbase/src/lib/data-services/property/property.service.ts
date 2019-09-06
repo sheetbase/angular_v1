@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Property } from '@sheetbase/models';
-import { Filter, DatabaseMethodOptions } from '@sheetbase/client';
+import { Filter, ItemsOptions, ItemOptions } from '@sheetbase/client';
 
 import { AppService } from '../../app-services/app/app.service';
 import { ApiService } from '../../sheetbase-services/api/api.service';
@@ -20,11 +20,11 @@ export class PropertyService {
     private Database: DatabaseService,
   ) {}
 
-  items(filter?: Filter, options: DatabaseMethodOptions = {}) {
+  items(filter?: Filter, options?: ItemsOptions) {
     return this.Database.items<Property>(this.sheet, filter, options);
   }
 
-  item(finder: string | Filter, options: DatabaseMethodOptions = {}) {
+  item(finder: string | Filter, options?: ItemOptions) {
     return this.Database.item<Property>(this.sheet, finder, options);
   }
 

@@ -12,11 +12,11 @@ export class UserService {
 
   constructor(private Api: ApiService) {}
 
-  profiles(uids: string[], cacheTime = 1440): Observable<{[uid: string]: UserProfile}> {
+  profiles(uids: string[], cacheTime?: number): Observable<{[uid: string]: UserProfile}> {
     return from(this.Api.get('/auth/public', { uids: uids.join(',') }, cacheTime));
   }
 
-  profile(uid: string, cacheTime = 1440): Observable<UserProfile> {
+  profile(uid: string, cacheTime?: number): Observable<UserProfile> {
     return from(this.Api.get('/auth/public', { uid }, cacheTime));
   }
 

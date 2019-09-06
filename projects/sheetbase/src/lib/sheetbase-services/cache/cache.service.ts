@@ -21,15 +21,11 @@ export class CacheService {
     return this.Sheetbase.cache().instance(storageConfigs);
   }
 
-  cacheTime(cacheTime: number) {
-    return this.Sheetbase.cache().cacheTime(cacheTime);
-  }
-
   set<Data>(key: string, data: Data, cacheTime?: number) {
     return from(this.Sheetbase.cache().set(key, data, cacheTime));
   }
 
-  get<Data>(key: string, refresher?: CacheRefresher<Data>, cacheTime = 0) {
+  get<Data>(key: string, refresher?: CacheRefresher<Data>, cacheTime?: number) {
     return from(this.Sheetbase.cache().get<Data>(key, refresher, cacheTime));
   }
 
