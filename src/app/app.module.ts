@@ -1,46 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
 import { HomeComponent } from './home/home.component';
-
-import {
-  AppService,
-  NavService,
-  CurrencyService,
-  DateService,
-  NotifyService,
-  CartService,
-  PlayerService,
-
-  SheetbaseService,
-  LocalstorageService,
-  CacheService,
-  FetchService,
-  ApiService,
-  DatabaseService,
-  AuthService,
-  MailService,
-  StorageService,
-
-  CategoryService,
-  TagService,
-  PageService,
-  PostService,
-  AuthorService,
-  ThreadService,
-  UserService,
-  OptionService,
-  BundleService,
-  AudioService,
-  VideoService,
-  ProductService,
-  OrderService,
-  PropertyService,
-  NotificationService,
-  PromotionService,
-} from 'sheetbase';
 
 @NgModule({
   declarations: [
@@ -51,42 +15,7 @@ import {
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [
-    AppService,
-    NavService,
-    CurrencyService,
-    DateService,
-    NotifyService,
-    CartService,
-    PlayerService,
-
-    SheetbaseService,
-    LocalstorageService,
-    CacheService,
-    FetchService,
-    ApiService,
-    DatabaseService,
-    AuthService,
-    MailService,
-    StorageService,
-
-    CategoryService,
-    TagService,
-    PageService,
-    PostService,
-    AuthorService,
-    ThreadService,
-    UserService,
-    OptionService,
-    BundleService,
-    AudioService,
-    VideoService,
-    ProductService,
-    OrderService,
-    PropertyService,
-    NotificationService,
-    PromotionService,
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
