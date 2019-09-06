@@ -13,11 +13,6 @@
     "url": "https://github.com/sheetbase/angular/issues"
   },
   "scripts": {
-    "start": "ng serve",
-    "lint": "ng lint",
-    "test": "ng test",
-    "e2e": "ng e2e",
-    "build": "ng build",
     "lint:sheetbase": "ng lint sheetbase",
     "test:sheetbase": "ng test sheetbase",
     "build:sheetbase": "cpx README.md \"projects/sheetbase\" && ng build sheetbase && cpx \"projects/sheetbase/src/lib/theming/**/*.*\" \"dist/sheetbase/theming\"",
