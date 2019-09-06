@@ -10,8 +10,8 @@ export class OauthPopupComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // process result
     if (window.opener !== null && !window.opener.closed) {
-      // process result
       window.opener.handleOauthResult(window.location.hash);
     }
     // close popup

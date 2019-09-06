@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { noMark } from '../../utils';
+import { cleanupStr } from '../../utils';
 
 @Pipe({
   name: 'lis'
@@ -15,7 +15,9 @@ export class LisPipe implements PipeTransform {
       for (const val of value.split(separator).map(x => x.trim())) {
         const item = { title: val };
         if (!!autoKey) {
-          item['$key'] = noMark(val).replace(/\ /g, '-').toLowerCase();
+          item['$key'] = cleanupStr(val)
+          .toLowerCase()
+          .replace(/\ /g, '-');
         }
         items.push(item);
       }

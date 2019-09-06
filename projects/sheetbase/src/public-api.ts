@@ -42,8 +42,6 @@ export { DataPromotionService } from './lib/services/data-promotion/data-promoti
 
 // components
 export { OauthPopupComponentModule } from './lib/components/oauth-popup/oauth-popup.module';
-export { OopsComponentModule } from './lib/components/oops/oops.module';
-export { SkeletonComponentModule } from './lib/components/skeleton/skeleton.module';
 
 // pipes
 export { O2aPipeModule } from './lib/pipes/o2a/o2a.module';

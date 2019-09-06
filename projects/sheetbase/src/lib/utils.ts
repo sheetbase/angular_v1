@@ -61,22 +61,26 @@ export function o2a(
   return output;
 }
 
+export function cleanupStr(value: string) {
+  return value
+  .toLowerCase()
+  .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a')
+  .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e')
+  .replace(/ì|í|ị|ỉ|ĩ/g, 'i')
+  .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o')
+  .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u')
+  .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y')
+  .replace(/đ/g, 'd');
+}
+
 export function filter<Item>(items: Item[], keyword: string, fields?: string[]) {
   const parse = (value: string) => {
-    const cleanValue = value
-      .toLowerCase()
-      .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a')
-      .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e')
-      .replace(/ì|í|ị|ỉ|ĩ/g, 'i')
-      .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o')
-      .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u')
-      .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y')
-      .replace(/đ/g, 'd');
+    const cleanValue = cleanupStr(value);
     const dashes2Spaces = cleanValue.replace(/\-|\_/g, ' ');
     const noDashes = cleanValue.replace(/\-|\_/g, '');
     return cleanValue + ' | ' + dashes2Spaces + ' | ' + noDashes;
   };
-  const finder = (item: Item, kw: string) => {
+  const finder = (item: Item, query: string) => {
     // build against content
     let content = item['title'] || item['$key'];
     (fields || []).forEach(field => {
@@ -85,20 +89,22 @@ export function filter<Item>(items: Item[], keyword: string, fields?: string[]) 
         return;
       } else if (value instanceof Object) {
         content = content + ' ' +
-          JSON.stringify(value)
-          .replace(/\{/gi, '')
-          .replace(/\"\}/gi, '')
-          .replace(/\{\"/gi, '')
-          .replace(/\"\:\"/gi, ' ')
-          .replace(/\"\,\"/gi, ' ')
-          .replace(/\"/gi, '');
+        JSON.stringify(value)
+        .replace(/\{/g, '')
+        .replace(/\"\}/g, '')
+        .replace(/\{\"/g, '')
+        .replace(/\"\:\"/g, ' ')
+        .replace(/\"\,\"/g, ' ')
+        .replace(/\"/g, '');
       } else {
         content = content + ' ' + value;
       }
     });
+    // finalize values
     content = parse(content);
+    query = cleanupStr(query);
     // check matching
-    return (content.indexOf(kw) !== -1);
+    return (content.indexOf(query) !== -1);
   };
   return !keyword ? items : (items || []).filter(item => finder(item, keyword));
 }
