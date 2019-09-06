@@ -4,43 +4,43 @@
 
 export { SheetbaseModule } from './lib/sheetbase.module';
 
-// util services
-export { AppService } from './lib/services/app/app.service';
-export { NavService } from './lib/services/nav/nav.service';
-export { NotificationService } from './lib/services/notification/notification.service';
-export { CurrencyService } from './lib/services/currency/currency.service';
-export { DateService } from './lib/services/date/date.service';
-export { CartService } from './lib/services/cart/cart.service';
-export { PlayerService } from './lib/services/player/player.service';
+// app services
+export { AppService } from './lib/app-services/app/app.service';
+export { NavService } from './lib/app-services/nav/nav.service';
+export { CurrencyService } from './lib/app-services/currency/currency.service';
+export { DateService } from './lib/app-services/date/date.service';
+export { NotifyService } from './lib/app-services/notify/notify.service';
+export { CartService } from './lib/app-services/cart/cart.service';
+export { PlayerService } from './lib/app-services/player/player.service';
 
 // Sheetbase services
-export { SheetbaseService } from './lib/services/sheetbase/sheetbase.service';
-export { ApiService } from './lib/services/api/api.service';
-export { FetchService } from './lib/services/fetch/fetch.service';
-export { LocalstorageService } from './lib/services/localstorage/localstorage.service';
-export { CacheService } from './lib/services/cache/cache.service';
-export { AuthService } from './lib/services/auth/auth.service';
-export { DatabaseService } from './lib/services/database/database.service';
-export { StorageService } from './lib/services/storage/storage.service';
-export { MailService } from './lib/services/mail/mail.service';
+export { SheetbaseService } from './lib/sheetbase-services/sheetbase/sheetbase.service';
+export { ApiService } from './lib/sheetbase-services/api/api.service';
+export { FetchService } from './lib/sheetbase-services/fetch/fetch.service';
+export { LocalstorageService } from './lib/sheetbase-services/localstorage/localstorage.service';
+export { CacheService } from './lib/sheetbase-services/cache/cache.service';
+export { AuthService } from './lib/sheetbase-services/auth/auth.service';
+export { DatabaseService } from './lib/sheetbase-services/database/database.service';
+export { StorageService } from './lib/sheetbase-services/storage/storage.service';
+export { MailService } from './lib/sheetbase-services/mail/mail.service';
 
 // Sheetbase data services
-export { DataCategoryService } from './lib/services/data-category/data-category.service';
-export { DataTagService } from './lib/services/data-tag/data-tag.service';
-export { DataPageService } from './lib/services/data-page/data-page.service';
-export { DataPostService } from './lib/services/data-post/data-post.service';
-export { DataAuthorService } from './lib/services/data-author/data-author.service';
-export { DataThreadService } from './lib/services/data-thread/data-thread.service';
-export { DataUserService } from './lib/services/data-user/data-user.service';
-export { DataOptionService } from './lib/services/data-option/data-option.service';
-export { DataBundleService } from './lib/services/data-bundle/data-bundle.service';
-export { DataAudioService } from './lib/services/data-audio/data-audio.service';
-export { DataVideoService } from './lib/services/data-video/data-video.service';
-export { DataProductService } from './lib/services/data-product/data-product.service';
-export { DataOrderService } from './lib/services/data-order/data-order.service';
-export { DataPropertyService } from './lib/services/data-property/data-property.service';
-export { DataNotificationService } from './lib/services/data-notification/data-notification.service';
-export { DataPromotionService } from './lib/services/data-promotion/data-promotion.service';
+export { CategoryService } from './lib/data-services/category/category.service';
+export { TagService } from './lib/data-services/tag/tag.service';
+export { PageService } from './lib/data-services/page/page.service';
+export { PostService } from './lib/data-services/post/post.service';
+export { AuthorService } from './lib/data-services/author/author.service';
+export { ThreadService } from './lib/data-services/thread/thread.service';
+export { UserService } from './lib/data-services/user/user.service';
+export { OptionService } from './lib/data-services/option/option.service';
+export { BundleService } from './lib/data-services/bundle/bundle.service';
+export { AudioService } from './lib/data-services/audio/audio.service';
+export { VideoService } from './lib/data-services/video/video.service';
+export { ProductService } from './lib/data-services/product/product.service';
+export { OrderService } from './lib/data-services/order/order.service';
+export { PropertyService } from './lib/data-services/property/property.service';
+export { NotificationService } from './lib/data-services/notification/notification.service';
+export { PromotionService } from './lib/data-services/promotion/promotion.service';
 
 // components
 export { OauthPopupComponentModule } from './lib/components/oauth-popup/oauth-popup.module';
