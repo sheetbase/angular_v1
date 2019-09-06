@@ -19,12 +19,10 @@
       "dom"
     ],
     "paths": {
-      "sheetbase": [
-        "dist/sheetbase"
-      ],
-      "sheetbase/*": [
-        "dist/sheetbase/*"
-      ]
+      "@sheetbase/models": ["../../models"],
+      "@sheetbase/models/*": ["../../models/*"],
+      "@sheetbase/client": ["../client"],
+      "@sheetbase/client/*": ["../client/*"]
     },
     "skipLibCheck": true
   },

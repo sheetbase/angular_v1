@@ -13,9 +13,9 @@
     "url": "https://github.com/sheetbase/angular/issues"
   },
   "scripts": {
-    "lint:sheetbase": "ng lint sheetbase",
-    "test:sheetbase": "ng test sheetbase",
-    "build:sheetbase": "cpx README.md \"projects/sheetbase\" && ng build sheetbase && cpx \"projects/sheetbase/src/lib/theming/**/*.*\" \"dist/sheetbase/theming\"",
+    "lint": "ng lint sheetbase",
+    "test": "ng test sheetbase",
+    "build": "cpx README.md \"projects/sheetbase\" && ng build sheetbase && cpx \"projects/sheetbase/src/lib/theming/**/*.*\" \"dist/sheetbase/theming\"",
     "coverage": "cat ./coverage/*/lcov.info | coveralls",
     "webdriver-update-ci": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37"
   },
@@ -29,8 +29,6 @@
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
     "@ionic/angular": "^4.7.4",
-    "@sheetbase/client": "^1.2.0",
-    "@sheetbase/models": "^1.8.0",
     "howler": "^2.1.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

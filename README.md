@@ -26,6 +26,10 @@ this.sheetbaseService.setApp(sheetbaseApp);
 const result = await this.sheetbaseService.api().get('/');
 ```
 
+## Module
+
+- `SheetbaseModule`: all components & pipes
+
 ## Services
 
 ### App
