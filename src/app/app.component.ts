@@ -22,7 +22,7 @@ export class AppComponent {
     private navService: NavService,
   ) {
 
-    // init app
+    // sheetbase
     this.sheetbaseService.setApp(
       initializeApp({
         // backend
@@ -42,7 +42,7 @@ export class AppComponent {
       }),
     );
 
-    // init nav
+    // nav
     this.navService.setRouter(this.router);
 
   }
