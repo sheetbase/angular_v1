@@ -16,36 +16,36 @@ export class SheetbaseService {
     return this;
   }
 
-  api() {
-    return this.app.api();
-  }
-
-  fetch() {
-    return this.app.fetch();
-  }
-
   localstorage() {
-    return this.app.localstorage();
+    return this.app.Localstorage;
   }
 
   cache() {
-    return this.app.cache();
+    return this.app.Cache;
+  }
+
+  fetch() {
+    return this.app.Fetch;
+  }
+
+  api() {
+    return this.app.Api;
   }
 
   database() {
-    return this.app.database();
+    return this.app.Database;
   }
 
   auth() {
-    return this.app.auth();
+    return this.app.Auth;
   }
 
   storage() {
-    return this.app.storage();
+    return this.app.Storage;
   }
 
   mail() {
-    return this.app.mail();
+    return this.app.Mail;
   }
 
 }

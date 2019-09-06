@@ -96,8 +96,8 @@ export class NavService {
     const queryParams = {};
     if (!!queryStringArr.length) {
       const queryItems = queryStringArr.join('?').split('&');
-      for (let i = 0; i < queryItems.length; i++) {
-        const [ key, value ] = queryItems[i].split('=');
+      for (const queryItem of queryItems) {
+        const [ key, value ] = queryItem.split('=');
         if (!!key && !!value) {
           queryParams[key] = value;
         }
@@ -200,8 +200,8 @@ export class NavService {
   }
 
   private setLinks(items: Array<{ rel: string, href: string }>) {
-    for (let i = 0; i < items.length; i++) {
-      const { rel, href } = items[i];
+    for (const item of items) {
+      const { rel, href } = item;
       let elem = this.dom.querySelector(`link[rel=${rel}]`);
       if (!elem) {
         // create

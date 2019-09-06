@@ -12,8 +12,8 @@ export class AppService {
   host = '';
 
   constructor() {
-    this.setDemension();
-    this.setHost();
+    this.loadDemension();
+    this.loadHost();
   }
 
   setOptions<AppOptions>(options: AppOptions): AppService {
@@ -30,7 +30,7 @@ export class AppService {
     return this;
   }
 
-  private setDemension() {
+  private loadDemension() {
     const setViewport = () => {
       this.width = window.innerWidth;
       this.height = window.innerHeight;
@@ -39,7 +39,7 @@ export class AppService {
     setViewport();
   }
 
-  private setHost() {
+  private loadHost() {
     const baseHref = ((document.getElementsByTagName('base')[0] || {})['href'] || '').slice(0, -1);
     if (!!baseHref) {
       this.host = baseHref;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
 
-import { Filter, DocsContentStyles, DataSegment } from '@sheetbase/client';
+import { Filter, DocsContentStyle, DataSegment, DatabaseMethodOptions } from '@sheetbase/client';
 
 import { SheetbaseService } from '../sheetbase/sheetbase.service';
 
@@ -12,67 +12,69 @@ export class DatabaseService {
 
   constructor(private Sheetbase: SheetbaseService) {}
 
-  setSegmentation(globalSegment: DataSegment) {
-    return this.Sheetbase.database().setSegmentation(globalSegment);
-  }
-
   direct() {
     return this.Sheetbase.database().direct();
   }
-
-  /**
-   * instances
-   */
 
   server() {
     return this.Sheetbase.database().server();
   }
 
-  all<Item>(sheet: string, cacheTime = 0) {
-    return from(this.Sheetbase.database().all<Item>(sheet, cacheTime));
+  setSegmentation(globalSegment: DataSegment) {
+    return this.Sheetbase.database().setSegmentation(globalSegment);
+  }
+
+  getMethodOptions(options: DatabaseMethodOptions) {
+    return this.Sheetbase.database().getMethodOptions(options);
   }
 
   /**
    * general get
    */
 
+  all<Item>(sheet: string, options: DatabaseMethodOptions = {}) {
+    return from(this.Sheetbase.database().all<Item>(sheet, options));
+  }
+
   query<Item>(
     sheet: string,
     filter: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().query<Item>(sheet, filter, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().query<Item>(sheet, filter, options));
   }
 
   items<Item>(
     sheet: string,
     filter?: Filter,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().items<Item>(sheet, filter, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().items<Item>(sheet, filter, options));
   }
 
   item<Item>(
     sheet: string,
     finder: string | Filter,
-    useCached = true,
-    cacheTime = 1440,
-    docsStyle: DocsContentStyles = 'original',
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().item<Item>(sheet, finder, useCached, cacheTime, docsStyle, segment));
+    return from(this.Sheetbase.database().item<Item>(sheet, finder, options));
   }
 
-  content(
-    url: string,
+  docsContent(
+    itemKey: string,
+    docId: string,
+    docsStyle: DocsContentStyle = 'full',
     cacheTime = 1440,
-    docsStyle: DocsContentStyles = 'original',
   ) {
-    return from(this.Sheetbase.database().content(url, cacheTime, docsStyle));
+    return from(this.Sheetbase.database().docsContent(itemKey, docId, docsStyle, cacheTime));
+  }
+
+  textContent(itemKey: string, url: string, cacheTime = 1440) {
+    return from(this.Sheetbase.database().textContent(itemKey, url, cacheTime));
+  }
+
+  jsonContent(itemKey: string, url: string, cacheTime = 1440) {
+    return from(this.Sheetbase.database().jsonContent(itemKey, url, cacheTime));
   }
 
   /**
@@ -111,194 +113,154 @@ export class DatabaseService {
     return from(this.Sheetbase.database().clearCachedAll(input));
   }
 
-  clearCachedItem<Item>(sheet: string, item: Item) {
-    return from(this.Sheetbase.database().clearCachedItem(sheet, item));
+  clearCachedItem(sheet: string, itemKey: string) {
+    return from(this.Sheetbase.database().clearCachedItem(sheet, itemKey));
   }
 
   /**
    * util get
    */
 
-  itemsOriginal<Item>(
-    sheet: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return from(this.Sheetbase.database().itemsOriginal<Item>(sheet, useCached, cacheTime, segment));
+  itemsOriginal<Item>(sheet: string, options: DatabaseMethodOptions = {}) {
+    return from(this.Sheetbase.database().itemsOriginal<Item>(sheet, options));
   }
 
-  itemsDraft<Item>(
-    sheet: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return from(this.Sheetbase.database().itemsDraft<Item>(sheet, useCached, cacheTime, segment));
+  itemsDraft<Item>(sheet: string, options: DatabaseMethodOptions = {}) {
+    return from(this.Sheetbase.database().itemsDraft<Item>(sheet, options));
   }
 
-  itemsPublished<Item>(
-    sheet: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return from(this.Sheetbase.database().itemsPublished<Item>(sheet, useCached, cacheTime, segment));
+  itemsPublished<Item>(sheet: string, options: DatabaseMethodOptions = {}) {
+    return from(this.Sheetbase.database().itemsPublished<Item>(sheet, options));
   }
 
-  itemsArchived<Item>(
-    sheet: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
-  ) {
-    return from(this.Sheetbase.database().itemsArchived<Item>(sheet, useCached, cacheTime, segment));
+  itemsArchived<Item>(sheet: string, options: DatabaseMethodOptions = {}) {
+    return from(this.Sheetbase.database().itemsArchived<Item>(sheet, options));
   }
 
   itemsByRelated<Item>(
     sheet: string,
     baseItem: Item,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByRelated<Item>(sheet, baseItem, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByRelated<Item>(sheet, baseItem, options));
   }
 
   itemsByType<Item>(
     sheet: string,
     type: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByType<Item>(sheet, type, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByType<Item>(sheet, type, options));
+  }
+
+  itemsByTypeDefault<Item>(sheet: string, options: DatabaseMethodOptions = {}) {
+    return from(this.Sheetbase.database().itemsByTypeDefault<Item>(sheet, options));
   }
 
   itemsByAuthor<Item>(
     sheet: string,
     authorKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByAuthor<Item>(sheet, authorKey, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByAuthor<Item>(sheet, authorKey, options));
   }
 
   itemsByLocale<Item>(
     sheet: string,
     locale: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByLocale<Item>(sheet, locale, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByLocale<Item>(sheet, locale, options));
   }
 
   itemsByOrigin<Item>(
     sheet: string,
     origin: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByOrigin<Item>(sheet, origin, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByOrigin<Item>(sheet, origin, options));
   }
 
   itemsByParent<Item>(
     sheet: string,
     parentKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByParent<Item>(sheet, parentKey, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByParent<Item>(sheet, parentKey, options));
   }
 
   itemsByTerm<Item>(
     sheet: string,
     taxonomy: string,
     termKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByTerm<Item>(sheet, taxonomy, termKey, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByTerm<Item>(sheet, taxonomy, termKey, options));
   }
 
   itemsByCategory<Item>(
     sheet: string,
     categoryKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByCategory<Item>(sheet, categoryKey, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByCategory<Item>(sheet, categoryKey, options));
   }
 
   itemsByTag<Item>(
     sheet: string,
     tagKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByTag<Item>(sheet, tagKey, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByTag<Item>(sheet, tagKey, options));
   }
 
   itemsByKeyword<Item>(
     sheet: string,
     keyword: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByKeyword<Item>(sheet, keyword, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByKeyword<Item>(sheet, keyword, options));
   }
 
   itemsByMetaExists<Item>(
     sheet: string,
     metaKey: string,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByMetaExists<Item>(sheet, metaKey, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByMetaExists<Item>(sheet, metaKey, options));
   }
 
   itemsByMetaEquals<Item>(
     sheet: string,
     metaKey: string,
     equalTo: any,
-    useCached = true,
-    cacheTime = 1440,
-    segment: DataSegment = null,
+    options: DatabaseMethodOptions = {},
   ) {
-    return from(this.Sheetbase.database().itemsByMetaEquals<Item>(sheet, metaKey, equalTo, useCached, cacheTime, segment));
+    return from(this.Sheetbase.database().itemsByMetaEquals<Item>(sheet, metaKey, equalTo, options));
   }
 
   /**
    * util set
    */
 
-  updateView(sheet: string, key: string) {
-    return from(this.Sheetbase.database().updateView(sheet, key));
+  viewing(sheet: string, key: string) {
+    return from(this.Sheetbase.database().viewing(sheet, key));
   }
 
-  updateLike(sheet: string, key: string) {
-    return from(this.Sheetbase.database().updateLike(sheet, key));
+  liking(sheet: string, key: string) {
+    return from(this.Sheetbase.database().liking(sheet, key));
   }
 
-  updateComment(sheet: string, key: string) {
-    return from(this.Sheetbase.database().updateComment(sheet, key));
+  commenting(sheet: string, key: string) {
+    return from(this.Sheetbase.database().commenting(sheet, key));
   }
 
-  rate(sheet: string, key: string, stars: number) {
-    return from(this.Sheetbase.database().rate(sheet, key, stars));
+  rating(sheet: string, key: string, stars: number) {
+    return from(this.Sheetbase.database().rating(sheet, key, stars));
   }
 
-  share(sheet: string, key: string, providers: string[] = []) {
-    return from(this.Sheetbase.database().share(sheet, key, providers));
+  sharing(sheet: string, key: string, providers: string[] = []) {
+    return from(this.Sheetbase.database().sharing(sheet, key, providers));
   }
 
 }

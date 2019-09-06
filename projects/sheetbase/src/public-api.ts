@@ -4,7 +4,16 @@
 
 export { SheetbaseModule } from './lib/sheetbase.module';
 
-// sheetbase services
+// util services
+export { AppService } from './lib/services/app/app.service';
+export { NavService } from './lib/services/nav/nav.service';
+export { NotificationService } from './lib/services/notification/notification.service';
+export { CurrencyService } from './lib/services/currency/currency.service';
+export { DateService } from './lib/services/date/date.service';
+export { CartService } from './lib/services/cart/cart.service';
+export { PlayerService } from './lib/services/player/player.service';
+
+// Sheetbase services
 export { SheetbaseService } from './lib/services/sheetbase/sheetbase.service';
 export { ApiService } from './lib/services/api/api.service';
 export { FetchService } from './lib/services/fetch/fetch.service';
@@ -15,14 +24,7 @@ export { DatabaseService } from './lib/services/database/database.service';
 export { StorageService } from './lib/services/storage/storage.service';
 export { MailService } from './lib/services/mail/mail.service';
 
-// util services
-export { AppService } from './lib/services/app/app.service';
-export { NavService } from './lib/services/nav/nav.service';
-export { NotificationService } from './lib/services/notification/notification.service';
-export { CurrencyService } from './lib/services/currency/currency.service';
-export { DateService } from './lib/services/date/date.service';
-
-// data services
+// Sheetbase data services
 export { DataCategoryService } from './lib/services/data-category/data-category.service';
 export { DataTagService } from './lib/services/data-tag/data-tag.service';
 export { DataPageService } from './lib/services/data-page/data-page.service';

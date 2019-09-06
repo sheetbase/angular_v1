@@ -32,8 +32,7 @@ export class NotificationService {
   notifications() {
     const unreadNotifications: Notification[] = [];
     const readNotifications: Notification[] = [];
-    for (let i = 0; i < this.rawNotifications.length; i++) {
-      const notification = this.rawNotifications[i];
+    for (const notification of this.rawNotifications) {
       if (this.readNotificationIds[notification.$key]) {
         notification['read'] = true;
         readNotifications.push(notification);
@@ -47,8 +46,7 @@ export class NotificationService {
   unreadNotifications() {
     const notifications: Notification[] = [];
     const allNotifications = this.notifications();
-    for (let i = 0; i < allNotifications.length; i++) {
-      const notification = allNotifications[i];
+    for (const notification of allNotifications) {
       if (!notification['read']) {
         notifications.push(notification);
       }
@@ -59,8 +57,7 @@ export class NotificationService {
   readNotifications() {
     const notifications: Notification[] = [];
     const allNotifications = this.notifications();
-    for (let i = 0; i < allNotifications.length; i++) {
-      const notification = allNotifications[i];
+    for (const notification of allNotifications) {
       if (notification['read']) {
         notifications.push(notification);
       }

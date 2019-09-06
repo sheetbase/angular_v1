@@ -25,16 +25,12 @@ export class CacheService {
     return this.Sheetbase.cache().cacheTime(cacheTime);
   }
 
-  set<Data>(key: string, data: Data, expiration?: number) {
-    return from(this.Sheetbase.cache().set(key, data, expiration));
+  set<Data>(key: string, data: Data, cacheTime?: number) {
+    return from(this.Sheetbase.cache().set(key, data, cacheTime));
   }
 
-  get<Data>(key: string, always = false) {
-    return from(this.Sheetbase.cache().get<Data>(key, always));
-  }
-
-  getRefresh<Data>(key: string, expiration?: number, refresher?: CacheRefresher<Data>) {
-    return from(this.Sheetbase.cache().getRefresh<Data>(key, expiration, refresher));
+  get<Data>(key: string, refresher?: CacheRefresher<Data>, cacheTime = 0) {
+    return from(this.Sheetbase.cache().get<Data>(key, refresher, cacheTime));
   }
 
   iterate<Data>(handler: LocalstorageIterateHandler<Data>) {
