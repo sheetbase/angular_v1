@@ -1,11 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { cleanupStr } from '../../utils';
+import { UtilsService } from '../../app-services/utils/utils.service';
 
 @Pipe({
   name: 'lis'
 })
 export class LisPipe implements PipeTransform {
+
+  constructor(private utilsService: UtilsService) {}
 
   transform(value: any, ... args: any[]): any {
     const [ autoKey = false, separator = ',' ] = args;
@@ -15,7 +17,7 @@ export class LisPipe implements PipeTransform {
       for (const val of value.split(separator).map(x => x.trim())) {
         const item = { title: val };
         if (!!autoKey) {
-          item['$key'] = cleanupStr(val)
+          item['$key'] = this.utilsService.cleanupStr(val)
           .toLowerCase()
           .replace(/\ /g, '-');
         }

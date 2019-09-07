@@ -1,10 +1,10 @@
 import { DatexPipe } from './datex.pipe';
 
-const fakeDateService: any = {};
+class MockedDateService {}
 
 describe('DatexPipe', () => {
   it('create an instance', () => {
-    const pipe = new DatexPipe(fakeDateService);
+    const pipe = new DatexPipe(new MockedDateService() as any);
     expect(pipe).toBeTruthy();
   });
 });
