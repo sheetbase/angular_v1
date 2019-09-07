@@ -1,5 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { Router, Event, RouteConfigLoadStart, RouteConfigLoadEnd, NavigationEnd } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { IonContent } from '@ionic/angular';
@@ -22,7 +21,6 @@ export class NavService {
   private routeMetas: {[url: string]: Metas} = {};
 
   constructor(
-    @Inject(DOCUMENT) private dom,
     private title: Title,
     private meta: Meta,
   ) {}
@@ -200,14 +198,15 @@ export class NavService {
   }
 
   private setLinks(items: Array<{ rel: string, href: string }>) {
+    const dom = window.document;
     for (const item of items) {
       const { rel, href } = item;
-      let elem = this.dom.querySelector(`link[rel=${rel}]`);
+      let elem = dom.querySelector(`link[rel=${rel}]`);
       if (!elem) {
         // create
-        elem = this.dom.createElement('link');
+        elem = dom.createElement('link');
         elem.setAttribute('rel', rel);
-        this.dom.head.appendChild(elem);
+        dom.head.appendChild(elem);
         elem.setAttribute('href', href);
       } else {
         // update
@@ -220,7 +219,7 @@ export class NavService {
     const title = data[rewriteFields['title'] || 'title'];
     const description = data[rewriteFields['description'] || 'description'];
     const image = data[rewriteFields['image'] || 'image'];
-    let url: string = data[rewriteFields['url'] || 'url'] || this.dom.URL;
+    let url: string = data[rewriteFields['url'] || 'url'] || window.document.URL;
     url = url.substr(-1) === '/' ? url : (url + '/');
     const author = data[rewriteFields['author'] || 'author'];
     const twitterCard = data[rewriteFields['twitterCard'] || 'twitterCard'];

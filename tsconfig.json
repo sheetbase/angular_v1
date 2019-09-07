@@ -22,7 +22,8 @@
       "@sheetbase/models": ["../../models"],
       "@sheetbase/models/*": ["../../models/*"],
       "@sheetbase/client": ["../client"],
-      "@sheetbase/client/*": ["../client/*"]
+      "@sheetbase/client/*": ["../client/*"],
+      "testing": ["./testing"]
     },
     "skipLibCheck": true
   },

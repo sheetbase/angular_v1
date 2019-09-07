@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MailService } from './mail.service';
-import { AppService } from './app.service';
+import { SheetbaseService } from '../sheetbase/sheetbase.service';
 
-const fakeApp = {};
+class MockedSheetbaseService {}
 
 describe('MailService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       {
-        provide: AppService,
-        useValue: { app: fakeApp }
-      }
-    ]
+        provide: SheetbaseService,
+        useValue: new MockedSheetbaseService(),
+      },
+    ],
   }));
 
   it('should be created', () => {

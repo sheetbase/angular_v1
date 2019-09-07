@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs';
 
 export function retryInterval(
-  fulfill: () => boolean,
-  everySeconds = 1,
-  forSeconds = 7,
+  matched: () => boolean,
+  interval = 1,
+  timeout = 7,
 ) {
   return new Observable(observer => {
     const handler = (intervalId: number) => {
-      if (fulfill()) {
+      if (matched()) {
         clearInterval(intervalId);
         // done
         observer.next(true);
@@ -16,14 +16,14 @@ export function retryInterval(
     };
     const actionInterval = setInterval(
       () => handler(actionInterval),
-      everySeconds * 1000,
+      interval * 1000,
     );
     handler(actionInterval); // immediately check
     // done anyway
     setTimeout(() => {
       clearInterval(actionInterval);
       observer.complete();
-    }, forSeconds * 1000);
+    }, timeout * 1000);
   });
 }
 
@@ -108,4 +108,3 @@ export function filter<Item>(items: Item[], keyword: string, fields?: string[]) 
   };
   return !keyword ? items : (items || []).filter(item => finder(item, keyword));
 }
-

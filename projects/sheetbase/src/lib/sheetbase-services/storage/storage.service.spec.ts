@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
 import { StorageService } from './storage.service';
-import { AppService } from './app.service';
+import { SheetbaseService } from '../sheetbase/sheetbase.service';
 
-const fakeApp = {};
+class MockedSheetbaseService {}
 
 describe('StorageService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       {
-        provide: AppService,
-        useValue: { app: fakeApp }
-      }
-    ]
+        provide: SheetbaseService,
+        useValue: new MockedSheetbaseService(),
+      },
+    ],
   }));
 
   it('should be created', () => {
