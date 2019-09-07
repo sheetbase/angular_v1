@@ -12,6 +12,7 @@ export { DateService } from './lib/app-services/date/date.service';
 export { NotifyService } from './lib/app-services/notify/notify.service';
 export { CartService } from './lib/app-services/cart/cart.service';
 export { PlayerService } from './lib/app-services/player/player.service';
+export { UtilsService } from './lib/app-services/utils/utils.service';
 
 // Sheetbase services
 export { SheetbaseService } from './lib/sheetbase-services/sheetbase/sheetbase.service';
@@ -56,4 +57,3 @@ export { LisPipeModule } from './lib/pipes/lis/lis.module';
 
 // misc
 export * from './lib/types';
-export * from './lib/utils';
